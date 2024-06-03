@@ -1,4 +1,4 @@
-# My first bot 
+# Reviews-Bot
 ### English
 Bot for receiving reviews in your channel via a referral link.
 
