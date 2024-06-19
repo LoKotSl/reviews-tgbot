@@ -7,36 +7,20 @@ from aiogram.fsm.state import State
 #--
 add_channel_state = State('add_channel')
 edit_channel_state = State('edit_channel')
-review_msg_state = State("review_msg")
 #--
 conn = sqlite3.connect('data/mydatabase.db')
 cursor = conn.cursor()
 #--
 from cfg import *
-from bot1.fun import *
-from bot1.db import *
-from bot1.keyb import *
+from bot.fun import *
+from bot.db import *
+from bot.keyb import *
 #--
-bot = Bot(TOKEN, parse_mode="HTML")
+bot = Bot(TOKEN)
 router = Router()
 
 
 
-@router.message(review_msg_state)
-async def review_msg_state_handler(message: Message, state: FSMContext) -> None:
-    try:
-        data = await state.get_data()
-        code = data.get('code')
-        us = cursor.execute('SELECT channel_link FROM channels WHERE id = ?', (code, )).fetchone()[0]
-        CHANNEL_ID = await get_channel_id(us)
-
-        await bot.forward_message(chat_id=CHANNEL_ID, from_chat_id=message.chat.id, message_id=message.message_id)
-        await message.answer("Отзыв получен")
-    except Exception as e:
-        await message.answer("Возникла ошибка при отправлении сообщения, владелец уведомлён об ошибке")
-        await bot.send_message(code, text="Ошибка при отправки сообщения в канал, проверьте состояние канала и находиться ли бот в нём")
-    finally:
-        await state.clear()
 
 @router.message(add_channel_state)
 async def add_channel_state_handler(message: Message, state: FSMContext) -> None:

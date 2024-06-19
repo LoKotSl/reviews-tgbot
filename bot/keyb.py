@@ -41,3 +41,26 @@ editchan_kb = InlineKeyboardMarkup(
         ]
     ]
 )
+
+language_kb = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="Русский", callback_data="rus"),
+            InlineKeyboardButton(text="English", callback_data="eng")
+        ]
+    ],
+    resize_keyboard=True,
+    selective=True
+)
+
+stars_kb = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text="🌟🌟🌟🌟🌟", callback_data="🌟🌟🌟🌟🌟")],
+        [InlineKeyboardButton(text="🌟🌟🌟🌟", callback_data="🌟🌟🌟🌟")],
+        [InlineKeyboardButton(text="🌟🌟🌟", callback_data="🌟🌟🌟")],
+        [InlineKeyboardButton(text="🌟🌟", callback_data="🌟🌟")],
+        [InlineKeyboardButton(text="🌟", callback_data="🌟")]
+    ],
+    resize_keyboard=True,
+    selective=True
+)
